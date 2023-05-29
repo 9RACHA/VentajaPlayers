@@ -26,9 +26,11 @@ Se esperaran 20s mediante -> yield return new WaitForSeconds(coroutina) que susp
 ![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/963a7733-5b64-4573-991b-e4dd86ea46db)
 Se generará un numero aleatorio entre 0 y 1
 
-Si el aleatorio es 0, sera un Nerf, Visualmente se vera el color rojo y la velocidad se vera reducida
+Si el aleatorio es 0, sera un Nerf, visualmente se vera el color rojo y la velocidad se vera reducida
 ![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/5a8d8fde-cc8c-4f20-b5e6-ff7a5b704589)
 
+Si el aleatorio es 1, sera una ventaja, visualmente se vera el color verde y la velocidad se vera aumentada
+![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/097ddb89-c005-408d-84ae-6296211cbe7c)
 
 
 
