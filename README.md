@@ -19,4 +19,13 @@ O enderezo de github que contén o proxecto
 Al ejecutar el juego desde Unity siendo el Host
 ![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/b686d28b-8154-43ce-8b44-468289b49f01)
 
+Mediante la coroutina VentajaNerf() 
+![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/040e5772-fde8-4447-8ce8-babdec0cf036)
+Se esperaran 20s mediante -> yield return new WaitForSeconds(coroutina) que suspende la ejecución de la coroutine durante el tiempo especificado.
+
+![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/963a7733-5b64-4573-991b-e4dd86ea46db)
+Se generará un numero aleatorio entre 0 y 1
+
+
+
  
