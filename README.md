@@ -13,4 +13,10 @@ Entregable:
 O script ou scripts relevantes
 Un pequeno informe cun par de capturas que demostren que o xogo funciona e coas explicacións que consideres axeitadas
 O enderezo de github que contén o proxecto
+
+## Informe
+
+Al ejecutar el juego desde Unity siendo el Host
+![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/b686d28b-8154-43ce-8b44-468289b49f01)
+
  
