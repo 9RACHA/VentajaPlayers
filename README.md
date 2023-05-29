@@ -32,6 +32,9 @@ Si el aleatorio es 0, sera un Nerf, visualmente se vera el color rojo y la veloc
 Si el aleatorio es 1, sera una ventaja, visualmente se vera el color verde y la velocidad se vera aumentada
 ![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/097ddb89-c005-408d-84ae-6296211cbe7c)
 
+Al hacer la build y ejecutarla como cliente 
+![image](https://github.com/9RACHA/VentajaPlayers/assets/66274956/fed6366b-cc2e-430a-b0d3-b3180e7696e5)
+
 
 
  
