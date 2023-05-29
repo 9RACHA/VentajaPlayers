@@ -7,7 +7,6 @@ using System.Collections;
 public class VentajaPlayer : NetworkBehaviour {
 
     public float velocidadMovimiento = 4f; // Velocidad de movimiento del jugador
-    public float fuerzaSalto = 10f; // Fuerza de salto del jugador
     private Rigidbody rb; // Referencia al componente Rigidbody adjunto al jugador
     private Renderer r; // Referencia al componente Renderer adjunto al jugador
     
