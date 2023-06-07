@@ -7,40 +7,44 @@ using System.Collections.Generic;
 
 public class GameManager : NetworkBehaviour {
 
-    private Color nerfPlayerCol = Color.red;
-    private Color ventajaPlayerCol = Color.green;
-    private float tiempoVN = 10f; // Duración de la ventaja o desventaja
-    private float coroutina = 20f; // Duración total de la coroutine (20 segundos)
+    private Color nerfPlayerCol = Color.red; // Color del efecto de nerf para el jugador
+    private Color ventajaPlayerCol = Color.green; // Color del efecto de ventaja para el jugador
+    private float tiempoVN = 10f; // Duración del buff o nerf
+    private float coroutina = 20f; // Tiempo para terminar la corrutina
 
-    private float nerfPlayerVel = 1f; // Factor de velocidad para la desventaja
-    private float ventajaPlayerVel = 2f; // Factor de velocidad para la ventaja
+    private float nerfPlayerVel = 1f; // Velocidad reducida para el jugador con nerf
+    private float ventajaPlayerVel = 2f; // Velocidad aumentada para el jugador con ventaja
 
-    private List<NetworkClient> players = new List<NetworkClient>(); // Lista de clientes conectados
+    private List<NetworkClient> players = new List<NetworkClient>();// Lista de jugadores conectados en la red
 
-    private int aleatorio; // Valor aleatorio para determinar si es ventaja o desventaja
-    private int playerAleatorio; // Índice aleatorio para seleccionar un jugador de la lista
+    private int aleatorio; // Número aleatorio para determinar si el jugador obtiene un efecto de nerf o ventaja
+    private int playerAleatorio; // Índice aleatorio del jugador al que se le aplicará el efecto
 
-    void OnGUI(){
+    void OnGUI() {
         GUILayout.BeginArea(new Rect(10, 10, 300, 300));
 
-        if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer){
-            StartButtons(); // Muestra los botones para iniciar como host o cliente
+        if (!NetworkManager.Singleton.IsClient && !NetworkManager.Singleton.IsServer)
+        {
+            StartButtons();
         }
-        else{
-            StatusLabels(); // Muestra información sobre el estado de la conexión
+        else
+        {
+            StatusLabels();
         }
 
         GUILayout.EndArea();
     }
 
-    void StartButtons(){
-        if (GUILayout.Button("Host")) NetworkManager.Singleton.StartHost(); // Inicia como host
-        StartCoroutine("VentajaNerf"); // Inicia la coroutine para aplicar ventajas y desventajas
-        if (GUILayout.Button("Client")) NetworkManager.Singleton.StartClient(); // Inicia como cliente
-        StartCoroutine("VentajaNerf"); // Inicia la coroutine para aplicar ventajas y desventajas
+    void StartButtons()
+    {
+        if (GUILayout.Button("Host")) NetworkManager.Singleton.StartHost();
+        StartCoroutine("VentajaNerf");
+        if (GUILayout.Button("Client")) NetworkManager.Singleton.StartClient();
+        StartCoroutine("VentajaNerf");
     }
 
-    static void StatusLabels() {
+    static void StatusLabels()
+    {
         var mode = NetworkManager.Singleton.IsHost ?
             "Host" : NetworkManager.Singleton.IsClient ? "Client" : "Client";
 
@@ -51,29 +55,31 @@ public class GameManager : NetworkBehaviour {
 
     IEnumerator VentajaNerf() {
         Debug.Log("Esperando Ventaja o Nerf");
-        yield return new WaitForSeconds(coroutina); // Espera durante el tiempo total de la coroutine
+        yield return new WaitForSeconds(coroutina);
 
+        // Obtiene la lista de jugadores conectados en la red
         players = new List<NetworkClient>();
-        foreach (NetworkClient id in NetworkManager.Singleton.ConnectedClientsList){
-            players.Add(id); // Obtiene la lista de clientes conectados
+        foreach (NetworkClient id in NetworkManager.Singleton.ConnectedClientsList)
+        {
+            players.Add(id);
         }
+        // Genera un número aleatorio para determinar si el jugador obtiene un efecto de nerf o ventaja
+        aleatorio = Random.Range(0, 2);
+        // Obtiene un índice aleatorio para seleccionar un jugador al que se le aplicará el efecto
+        playerAleatorio = Random.Range(0, players.Count);
+        Debug.Log("El aleatorio es: " + aleatorio);
 
-        aleatorio = Random.Range(0, 2); // Genera un número aleatorio (0 o 1)
-        playerAleatorio = Random.Range(0, players.Count); // Selecciona un índice aleatorio de la lista de jugadores
-
-        Debug.Log("el aleatorio es: " + aleatorio);
-
-        if (aleatorio == 0){
-            // Aplica una desventaja al jugador seleccionado de forma aleatoria
+        // Aplica el efecto de nerf al jugador seleccionado
+        if (aleatorio == 0)
+        {
             players[playerAleatorio].PlayerObject.GetComponent<VentajaPlayer>().VentajaNerfClientRpc(nerfPlayerVel, tiempoVN, nerfPlayerCol);
             Debug.Log("Estoy nerf");
         }
-        else if (aleatorio == 1){
-            // Aplica una ventaja al jugador seleccionado de forma aleatoria
+        // Aplica el efecto de ventaja al jugador seleccionado
+        else if (aleatorio == 1)
+        {
             players[playerAleatorio].PlayerObject.GetComponent<VentajaPlayer>().VentajaNerfClientRpc(ventajaPlayerVel, tiempoVN, ventajaPlayerCol);
             Debug.Log("Tengo ventaja");
         }
     }
 }
-
-    
